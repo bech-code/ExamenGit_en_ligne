@@ -1,0 +1,25 @@
+name: CI - Tests Python
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Installation de Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Installation des dependances
+        run: pip install pytest
+
+      - name: Lancer les tests unitaires
+        run: python -m pytest test_fonctions.py -v
